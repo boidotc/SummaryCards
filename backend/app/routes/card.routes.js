@@ -7,7 +7,7 @@ module.exports = app => {
   router.post("/", cards.create);
 
   // Retrieve all cards
-  // router.get("/", cards.findAll);
+  router.get("/", cards.findAll);
   //
   // // Retrieve all published cards
   // // router.get("/published", cards.findAllPublished);
