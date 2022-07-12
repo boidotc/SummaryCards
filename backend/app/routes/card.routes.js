@@ -12,8 +12,8 @@ module.exports = app => {
   // // Retrieve all published cards
   // // router.get("/published", cards.findAllPublished);
   //
-  // // Retrieve single card with id
-  // router.get("/:id", cards.findOne);
+  // Retrieve single card with id
+  router.get("/:id", cards.findOne);
   //
   // // Update card with id
   // router.put("/:id", cards.update);
