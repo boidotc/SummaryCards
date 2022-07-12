@@ -1,11 +1,11 @@
 import React from "react";
 import {Button} from 'react-bootstrap';
-import './HomePage.css';
+import './CheckAllCardsPage.css';
 
-import CardService  from '../services/card.service';
+import CardService  from '../../services/card.service';
 import CardsTable from "./CardsTable";
 
-function HomePage() {
+function CheckAllCardsPage() {
   
     const [post, setPost] = React.useState([]);
     
@@ -16,15 +16,12 @@ function HomePage() {
         });
         
     }
-
     return (
-        
         <div>
-            
             <CardsTable cardsList={post}/>
-            <Button onClick={getAllCards()}>Try this</Button> 
+            <Button id = "createCardButton" onClick={getAllCards()}>Create a new Card</Button> 
         </div>
     );
 }
 
-export default HomePage;
+export default CheckAllCardsPage;

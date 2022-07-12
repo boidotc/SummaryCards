@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -44,15 +46,10 @@ body {
     sans-serif;
 }
 
-h1 {
+/* h1 {
   font-weight: 100;
   color: white;
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 1px solid rgb(79, 98, 148);
-}
-
-.App {
-  max-width: 600px;
-  margin: 0 auto;
-}
+} */

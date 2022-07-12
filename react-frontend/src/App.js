@@ -1,28 +1,18 @@
 import './App.css';
 
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import Row from 'react-bootstrap/Row';
 
-import HomePage from './myComponents/HomePage.js'
+import Header from './myComponents/Header.js'
+import PageSelector from'./myComponents/PageSelector.js'
 
 function App() {
   return(
-    <div>
-      <h1>On va commencer simple</h1>
-      <Navbar bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-
-      <HomePage />
-    </div>
+    <Container>
+      <Header />
+      <Row id = "spaceRow"></Row>
+      <PageSelector />
+    </Container>
   );
 }
 

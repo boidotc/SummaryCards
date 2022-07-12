@@ -1,0 +1,5 @@
+Blue light: rgb(65, 77, 186) #414DBA
+Blue dark: rgb(39, 51, 160) #2733A0
+Black: rgb(0, 0, 0) #000000
+White: rgb(241, 241, 241) #F1F1F1
+Grey Light: rgb(178, 168, 168) #B2A8A8

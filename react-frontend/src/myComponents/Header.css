@@ -1,0 +1,52 @@
+#headerContainer {
+    /* background-color: blue; */
+    width: 100%;
+    /* background: #8e44ad; */
+}
+
+#NavLink:hover {
+    background: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navlink{
+    font-family: 'Roboto', sans-serif;
+    color: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%) !important;
+  }
+
+#HeaderRow {
+    /* background-color: grey; */
+    height: 90px;
+    width: 100%;
+}
+
+#titleCol {
+    /* background-color: aqua; */
+}
+
+#navbarCol {
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#navbar {
+    /* background-color: brown; */
+    width: 100%;
+    margin-top: 17px;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#logo {
+    width: auto;
+    height: 90px;
+    opacity: 1;
+}
+
+#logo:hover {
+     opacity: 0.55;
+}

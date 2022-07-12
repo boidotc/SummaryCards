@@ -1,4 +1,4 @@
-import CardsInTable from "../myComponents/CardInTable";
+import CardsInTable from "./CardInTable";
 import './CardsTable.css';
 
 function CardsTable(cardsList){
