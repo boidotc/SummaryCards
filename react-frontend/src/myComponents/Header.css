@@ -1,3 +1,12 @@
+:root{
+    --primary_color: none;
+    --secondary_color: none;
+    --third_color: none;
+    --fourth_color: none;
+    --intermediate_color: none;
+    --gradient: none;
+  }
+  
 #headerContainer {
     /* background-color: blue; */
     width: 100%;
@@ -5,14 +14,14 @@
 }
 
 #NavLink:hover {
-    background: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%);
+    background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .navlink{
     font-family: 'Roboto', sans-serif;
-    color: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%) !important;
+    color: var(--gradient) !important;
   }
 
 #HeaderRow {

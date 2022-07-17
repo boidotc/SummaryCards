@@ -1,4 +1,5 @@
 import './App.css';
+import setThemeColors from './themeColors';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -7,11 +8,17 @@ import Header from './myComponents/Header.js'
 import PageSelector from'./myComponents/PageSelector.js'
 
 function App() {
+
   return(
+    
     <Container>
-      <Header />
-      <Row id = "spaceRow"></Row>
-      <PageSelector />
+      {setThemeColors()}
+      <Row>
+        <Header />
+      </Row>
+      <Row>
+        <PageSelector />
+      </Row>
     </Container>
   );
 }

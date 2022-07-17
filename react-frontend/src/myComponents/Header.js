@@ -17,9 +17,9 @@ function Header() {
                     </Nav.Link>
                 </Col>
                 <Col id = "navbarCol" >
-                    <Navbar id = "navbar" bg="alert" variant="dark">
-                        <Navbar.Brand id = "NavLink" href="/">Home</Navbar.Brand>
+                    <Navbar id = "navbar" sticky="top" bg="alert" variant="dark">
                         <Nav className="me-auto">
+                            <Nav.Link id = "NavLink" href="/">Home</Nav.Link>
                             <Nav.Link id = "NavLink" href="/cards">Browse cards</Nav.Link>
                             <Nav.Link id = "NavLink" href="/create">Create a card</Nav.Link>
                         </Nav>

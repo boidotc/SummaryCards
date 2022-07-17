@@ -11,11 +11,12 @@ exports.create = (req, res) => {
   const card = new Card({
     title: req.body.title,
     description: req.body.description,
-    topics: req.body.topics ? req.body.topics : {},
-    keywords: req.body.keywords ? req.body.keywords : {},
-    references: req.body.references ? req.body.references : {},
-    path_pdf: "",
-    path_content: ""
+    content: req.body.content ? req.body.content : {},
+    topics: req.body.topics ? req.body.topics : [],
+    keywords: req.body.keywords ? req.body.keywords : [],
+    references: req.body.references ? req.body.references : [],
+    path_pdf: req.body.path_pdf ? req.body.path_pdf : "",
+    path_content: req.body.path_content ? req.body.path_content : "",
   });
 
   card
@@ -31,7 +32,7 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Tutorials from the database.
+// Retrieve all Cards from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
@@ -48,7 +49,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single Tutorial with an id
+// Find a single Card with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
@@ -61,6 +62,28 @@ exports.findOne = (req, res) => {
     .catch(err => {
       res
         .status(500)
-        .send({ message: "Error retrieving Tutorial with id=" + id });
+        .send({ message: "Error retrieving Card with id=" + id });
+    });
+};
+
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Card.findByIdAndRemove(id, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Card with id=${id}. Maybe Card was not found!`
+        });
+      } else {
+        res.send({
+          message: "Card was deleted successfully!"
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Card with id=" + id
+      });
     });
 };

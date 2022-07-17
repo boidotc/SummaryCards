@@ -8,14 +8,17 @@ import {
 } from "react-router-dom";
 
 import CheckAllCardsPage from "./cardsPage/CheckAllCardsPage";
+import CardCreationPage from "./creationPage/CardCreationPage";
+import HomePage from "./homePage/HomePage"
+
 
 function PageSelector(){
     return (
         <BrowserRouter>
             <Routes>
-              <Route path="/" element={<h1>Home page TBD</h1>} />
-              <Route path="/cards" element={<CheckAllCardsPage></CheckAllCardsPage>} />
-              <Route path="/create" element={<h1>Creation page TBD</h1>} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/cards" element={<CheckAllCardsPage />} />
+              <Route path="/create" element={<CardCreationPage />} />
             </Routes>
 
         </BrowserRouter>

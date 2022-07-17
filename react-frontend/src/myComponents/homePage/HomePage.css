@@ -1,0 +1,46 @@
+:root{
+    --primary_color: none;
+    --secondary_color: none;
+    --third_color: none;
+    --fourth_color: none;
+    --intermediate_color: none;
+    --gradient: linear-gradient(to right, purple 0%, red  100%);
+  }
+
+#presentationRow {
+    margin-top: 50px;
+}
+
+#presentationCard, #paragraphs {
+    background-color: var(--fourth_color);
+}
+
+h1,h2,h3{
+    text-align: center;
+}
+
+
+h2, h3 {
+    
+}
+
+h2 {
+    color: var(--fourth_color);
+    /* background: var(--fourth_color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    font-weight: bold;
+}
+
+p {
+    color: var(--third_color);
+}
+
+#presentation {
+    margin-top: 5%;
+    color: var(--fourth_color);
+}
+
+#emphasized {
+    color: var(--secondary_color);
+}

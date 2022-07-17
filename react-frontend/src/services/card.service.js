@@ -1,19 +1,17 @@
 import axios from 'axios';
-
-const API_URL = 'http://localhost:8080/api/cards/';
-
+import { DbAddressApi as API_URL} from '../config';
 
 // A updater avec les routes dans le backend
 class CardService {
-  getAll() {
+  getAll() { //dev
     return axios.get(API_URL);
   }
 
-  get(id) {
+  get(id) { //dev
     return axios.get(API_URL + id);
   }
 
-  create(data) {
+  create(data) { //dev
     return axios.post(API_URL, data);
   }
 
@@ -21,7 +19,7 @@ class CardService {
     return axios.put(API_URL + id, data);
   }
 
-  delete(id) {
+  delete(id) { //dev
     return axios.delete(API_URL + id);
   }
 

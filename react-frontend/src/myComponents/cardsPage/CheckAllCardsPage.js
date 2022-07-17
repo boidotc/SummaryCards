@@ -1,5 +1,5 @@
 import React from "react";
-import {Button} from 'react-bootstrap';
+import {Button, Container, Row, Col} from 'react-bootstrap';
 import './CheckAllCardsPage.css';
 
 import CardService  from '../../services/card.service';
@@ -12,14 +12,19 @@ function CheckAllCardsPage() {
     function getAllCards() {
       CardService.getAll()
         .then((response) => {
-          setPost(response.data);
+          if(response.status === 200){
+            setPost(response.data);
+          } else {
+            console.log("Couldn't get all cards.");
+          }
         });
-        
     }
+
     return (
         <div>
+            {getAllCards()}
             <CardsTable cardsList={post}/>
-            <Button id = "createCardButton" onClick={getAllCards()}>Create a new Card</Button> 
+            <Button id = "createCardButton" href="/create">Create a new Card</Button> 
         </div>
     );
 }
