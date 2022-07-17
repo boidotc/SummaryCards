@@ -87,3 +87,28 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+// Update a Card by the id in the request
+exports.update = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Data to update can not be empty!"
+    });
+  }
+
+  const id = req.params.id;
+
+  Card.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Card with id=${id}. Maybe Card was not found!`
+        });
+      } else res.send({ message: "Card was updated successfully." });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Card with id=" + id
+      });
+    });
+};

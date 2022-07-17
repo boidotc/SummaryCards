@@ -15,11 +15,11 @@ module.exports = app => {
   // Retrieve single card with id
   router.get("/:id", cards.findOne);
   //
-  // // Update card with id
-  // router.put("/:id", cards.update);
+  // Update card with id
+  router.put("/:id", cards.update);
   //
   // // Delete card with id
-  // router.delete("/:id", cards.delete);
+  router.delete("/:id", cards.delete);
   //
   // // Create new card
   // router.delete("/", cards.deleteAll);

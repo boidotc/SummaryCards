@@ -1,9 +1,9 @@
-import React, { Component, useEffect } from "react";
-import {Button, Container, Row, Col} from 'react-bootstrap';
+import React, { useEffect } from "react";
+import {Button, Row, Col, Container} from 'react-bootstrap';
+import {ImCross} from "react-icons/im";
 import './CheckAllCardsPage.css';
 
-import { DbAddressApi } from '../../config';
-
+import ActiveCard from './ActiveCard';
 import CardService  from '../../services/card.service';
 
 function CheckAllCardsPage() {
@@ -44,7 +44,12 @@ function CheckAllCardsPage() {
       const id = data.id;
       CardService.get(id).then((response) => {
         if(response.status === 200){
-          setActiveCard(response.data);
+          setActiveCard(
+            <Container>
+              <Button onClick={()=>{setActiveCard([])}}><ImCross/></Button>
+              <ActiveCard data={response.data}/>
+            </Container>
+          );
         } else {
           console.log(response);
         }
@@ -52,7 +57,8 @@ function CheckAllCardsPage() {
     }
 
     return (
-        <div>
+        <Row>
+          <Col>
             <table id = "cards">
               <tbody>
                   <tr>
@@ -63,8 +69,13 @@ function CheckAllCardsPage() {
               </tbody>
             </table>
             <Button id = "createCardButton" href="/create">Create a new Card</Button> 
-            <p style={{color: "white"}}>{JSON.stringify(activeCard)}</p>
-        </div>
+            
+          </Col>
+          <Col>
+            {activeCard}
+          {/* <p style={{color: "white",width:"30%"}}>{JSON.stringify(activeCard)}</p> */}
+          </Col>
+        </Row>
     );
 }
 

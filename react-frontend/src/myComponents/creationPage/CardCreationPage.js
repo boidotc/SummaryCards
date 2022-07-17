@@ -4,7 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 import CardService  from '../../services/card.service.js';
-import { Alert, Container, Toast } from 'react-bootstrap';
+import { Container, Toast } from 'react-bootstrap';
 
 function CardCreationPage(){
 
@@ -93,7 +93,7 @@ function CardCreationPage(){
         <Container>
             <h1 id="wdylt">What did you learn today?</h1>
             
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} autocomplete="off">
                 <h2>Title of the Card</h2>
                 <input defaultValue="title" key={ 'title'} {...register("title", { required: true })} />
                 {errors.exampleRequired && <p id="required">This field is required!</p>}

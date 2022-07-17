@@ -32,11 +32,11 @@ body {
     margin: 0 auto;
   }
   
-  p {
+  #required {
     color: #bf1650;
   }
   
-  p::before {
+  #required::before {
     display: inline;
     content: "⚠ ";
   }
