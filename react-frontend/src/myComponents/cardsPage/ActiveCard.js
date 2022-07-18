@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Card, Col, Row, Toast, Accordion, Container } from "react-bootstrap";
+import { Button, Card, Col, Row, Accordion, Container } from "react-bootstrap";
 import CardService  from '../../services/card.service';
 import {AiFillEdit} from "react-icons/ai";
 import {BsFillTrashFill} from "react-icons/bs";
@@ -8,9 +8,15 @@ import {BsFillTrashFill} from "react-icons/bs";
 export default function ActiveCard(data){
 
     const [mode, setMode] = React.useState("normal");
-    const [toast, setToast] = React.useState([]);
     const [inputList, setInputList] = React.useState(data.data.content);
+    const [randKey, setRandKey] = React.useState(Math.random());
+    let title = data.data.title;
+    let desc = data.data.description;
 
+    const handleChange = event => {
+        title = data.data.title;
+        desc = data.data.description;
+      };
 
     function onDelete(data){
         CardService.delete(data).then(
@@ -19,16 +25,9 @@ export default function ActiveCard(data){
                     window.location.replace("/cards");
                 }
                 else {
-                    setToast(
-                        <Toast bg={"danger"}>
-                            <Toast.Body>
-                                Something went wrong.
-                            </Toast.Body>
-                         </Toast>
-                    );
                 }
             });
-            setTimeout(() => { setToast(); }, 5000);
+            setTimeout(() => {  }, 5000);
     }
 
      /** form add/remove input methods **/
@@ -57,14 +56,12 @@ export default function ActiveCard(data){
     const {
         register,
         handleSubmit,
-        watch, //to check if the value has changed
         formState: { errors }
       } = useForm();
 
       const onSubmit = (data) => { 
         var updatedCard = data;
         updatedCard.content=inputList;     
-        console.log(JSON.stringify(data));
         edit(updatedCard);
       };
 
@@ -74,7 +71,8 @@ export default function ActiveCard(data){
                 CardService.update(data.data.id, card).then((response) => {
                     console.log(response);
                     if(response.status === 200){
-                        console.log("donee!")
+                        console.log("donee!");
+                        window.location.replace("/cards");
                     }
                     else {
                         console.log("something went wrong");
@@ -83,9 +81,14 @@ export default function ActiveCard(data){
             } catch (error) {
                 console.log(error);
             }
-            setTimeout(() => { }, 5000)      
+            setTimeout(() => { }, 5000);
         }
     }
+
+    useEffect(() => {
+        title = data.data.title;
+        desc = data.data.description;
+    });
 
     function displayContentMode(){
         if(mode === "normal"){
@@ -99,7 +102,7 @@ export default function ActiveCard(data){
                     <Accordion flush>
                     {data.data.content.map((x, i) => {
                         return (
-                            <Accordion.Item eventKey={i}>
+                            <Accordion.Item key={"ai"+i} eventKey={i}>
                                 <Accordion.Header>{x.paragraphTitle}</Accordion.Header>
                                 <Accordion.Body>{x.paragraphContent}</Accordion.Body>
                             </Accordion.Item>
@@ -112,7 +115,12 @@ export default function ActiveCard(data){
                         <Button>Generate PDF</Button>
                     </Col>
                     <Col style={{width: "33%"}}>
-                        <Button onClick={() =>{setMode("edit")}}><AiFillEdit/></Button>
+                        <Button onClick={() =>{
+                            setMode("edit");
+                            setInputList(data.data.content);
+                            setRandKey(Math.random());
+                            document.querySelectorAll("button").forEach((button) =>{button.disabled = true});
+                        }}><AiFillEdit/></Button>
                     </Col>
                     <Col style={{width: "33%"}}>
                         <Button style={{backgroundColor: "red", marginLeft: "80px"}} onClick={() =>{onDelete(data.data.id)}}><BsFillTrashFill/></Button>
@@ -126,23 +134,25 @@ export default function ActiveCard(data){
                     <Card.Body>
                         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                             <Card.Title>
-                                <input defaultValue={data.data.title} key={'title'} {...register("title", { required: true })} />
-                                {errors.exampleRequired && <p id="required">This field is required!</p>}
+                                <div key={randKey}>
+                                    <input defaultValue={title} {...register("title", { required: true })} />
+                                    {errors.exampleRequired && <p id="required">This field is required!</p>}
+                                </div>
                             </Card.Title>
                             <Card.Text>
-                                <input defaultValue={data.data.description} key={ 'desc'} {...register("description", { required: true })} />
+                                <input value={desc} key={ 'desc'} onChange={handleChange()}{...register("description", { required: true })} />
                                 {errors.exampleRequired && <p id="required">This field is required!</p>}
                             </Card.Text>
                             {inputList.map((x, i) => {
                                 return (
-                                    <div className="box" key={ 'section-${ i }'}>
-                                        <input key={ 'sectionTitle-${ i }'}
+                                    <div className="box" key={"div-"+i}>
+                                        <input
                                         name="paragraphTitle"
                                         defaultValue={x.paragraphTitle}
                                         value={x.title}
                                         onChange={e => handleInputChange(e, i)}
                                         />
-                                        <input key={ 'sectionDesc-${ i }'}
+                                        <input
                                         className="ml10"
                                         name="paragraphContent"
                                         defaultValue={x.paragraphContent}
@@ -156,14 +166,18 @@ export default function ActiveCard(data){
                                     </div>                 
                                 );
                             })}
-                            <input type="submit" />
+                            <Row>
+                                <Col style={{width: "33%"}}>
+                                    <Button onClick={() =>{
+                                        setMode("normal");
+                                        document.querySelectorAll("button").forEach((button) =>{button.disabled = false});
+                                    }}>Exit editing</Button>
+                                    <input type="submit"/>
+                                </Col>
+                            </Row>
                         </form>
                     </Card.Body>
-                    <Row>
-                        <Col style={{width: "33%"}}>
-                            <Button onClick={() =>{setMode("normal")}}>Cancel edit</Button>
-                        </Col>
-                    </Row>
+                    
                 </Container>
             );
         }
