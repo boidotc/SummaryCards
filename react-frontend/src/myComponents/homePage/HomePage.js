@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Accordion from 'react-bootstrap/Accordion';
 
 import setThemeColors from '../../themeColors';
@@ -17,27 +16,41 @@ function HomePage(){
             <Row id = "presentationRow">
                 <Col>
                     <Card style={{ width: '550px'}} id = "presentationCard">
-                        <Card.Img variant="top" src={require("../logos/logo-card.png")} style={{ width: '95%', height: "auto",marginLeft: "auto", marginRight: "auto", marginTop: "2.5%" }}/>
+                        {/* <Card.Img variant="top" src={require("../logos/logo-card.png")} style={{ width: '95%', height: "auto",marginLeft: "auto", marginRight: "auto", marginTop: "2.5%" }}/> */}
                         <Card.Body>
                             <Card.Title><h1>Did you say <span id="emphasized">Mind Cards</span>?</h1></Card.Title>
                             <Card.Text>
-                                <p>
                                     Mind Cards is an app to allow you to learn new 
                                     subjects and make cards in order to remember them more easily! 
                                     These cards are stored on a database and therefore accessible from anywhere ;)
-                                </p>
                             </Card.Text>
                         </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item id = "paragraphs">
-                                <h3>Paragraph 1</h3>
-                                <p>Le lorem ipsum (également appelé faux-texte, lipsum, ou bolo bolo1) est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée.</p>
-                            </ListGroup.Item>
-                            <ListGroup.Item id = "paragraphs">
-                                <h3>Paragraph 2</h3>
-                                <p>Le lorem ipsum (également appelé faux-texte, lipsum, ou bolo bolo1) est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée.</p>
-                            </ListGroup.Item>
-                        </ListGroup>
+                        <Accordion /*activeKey={"0"}*/>
+                            <Accordion.Item eventKey="0">
+                                <Accordion.Header>Paragraph 1</Accordion.Header>
+                                <Accordion.Body>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                culpa qui officia deserunt mollit anim id est laborum.
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="1">
+                                <Accordion.Header>Paragraph 2</Accordion.Header>
+                                <Accordion.Body>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                culpa qui officia deserunt mollit anim id est laborum.
+                                </Accordion.Body>
+                            </Accordion.Item>
+                        </Accordion>
                         <Card.Body>
                             <Card.Link href="https://www.verywellmind.com/how-to-become-a-more-effective-learner-2795162">How to learn</Card.Link>
                             <Card.Link href="https://hbr.org/2016/03/learning-to-learn">Learning to learn (HBR)</Card.Link>

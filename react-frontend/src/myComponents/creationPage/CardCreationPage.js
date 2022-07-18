@@ -93,7 +93,7 @@ function CardCreationPage(){
         <Container>
             <h1 id="wdylt">What did you learn today?</h1>
             
-            <form onSubmit={handleSubmit(onSubmit)} autocomplete="off">
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                 <h2>Title of the Card</h2>
                 <input defaultValue="title" key={ 'title'} {...register("title", { required: true })} />
                 {errors.exampleRequired && <p id="required">This field is required!</p>}

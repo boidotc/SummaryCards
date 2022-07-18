@@ -41,7 +41,7 @@ body {
     content: "⚠ ";
   }
   
-  input {
+  /* input {
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -50,9 +50,9 @@ body {
     padding: 10px 15px;
     margin-bottom: 10px;
     font-size: 14px;
-  }
+  } */
   
-  label {
+  /* label {
     line-height: 2;
     text-align: left;
     display: block;
@@ -61,7 +61,7 @@ body {
     color: white;
     font-size: 14px;
     font-weight: 200;
-  }
+  } */
   
   button[type="submit"],
   input[type="submit"] {
@@ -110,7 +110,7 @@ body {
     margin: 0 auto;
   }
   
-  button[type="button"] {
+  /* button[type="button"] {
     display: block;
     appearance: none;
     background: #333;
@@ -119,13 +119,13 @@ body {
     text-transform: uppercase;
     padding: 10px 20px;
     border-radius: 4px;
-  }
+  } */
   
   hr {
     margin-top: 30px;
   }
   
-  button {
+  /* button {
     display: block;
     appearance: none;
     margin-top: 40px;
@@ -134,7 +134,7 @@ body {
     text-transform: uppercase;
     padding: 10px 20px;
     border-radius: 4px;
-  }
+  } */
   
   #required {
     color: red;

@@ -46,8 +46,10 @@ function CheckAllCardsPage() {
         if(response.status === 200){
           setActiveCard(
             <Container>
-              <Button onClick={()=>{setActiveCard([])}}><ImCross/></Button>
-              <ActiveCard data={response.data}/>
+              <Row>
+                <Col><ActiveCard data={response.data}/></Col>
+                <Col><Button style={{position: "absolute"}} onClick={()=>{setActiveCard([])}}><ImCross/></Button></Col>
+              </Row>
             </Container>
           );
         } else {
@@ -73,7 +75,6 @@ function CheckAllCardsPage() {
           </Col>
           <Col>
             {activeCard}
-          {/* <p style={{color: "white",width:"30%"}}>{JSON.stringify(activeCard)}</p> */}
           </Col>
         </Row>
     );
