@@ -11,12 +11,12 @@ function App() {
 
   return(
     
-    <Container>
+    <Container fluid>
       {setThemeColors()}
       <Row>
         <Header />
       </Row>
-      <Row>
+      <Row className="parallax" style={{marginTop: "2%"}}>
         <PageSelector />
       </Row>
     </Container>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {Button, Row, Col, Container} from 'react-bootstrap';
+import {Button, Row, Col, Container, Table} from 'react-bootstrap';
 import {ImCross} from "react-icons/im";
 import './CheckAllCardsPage.css';
 
@@ -30,8 +30,8 @@ function CheckAllCardsPage() {
               let description = post[i].description;
               let id = post[i].id;
               cardsTable.push(
-                <tr key={id}>
-                  <td id = "title"><Button onClick={() =>{displayCard({id})}}>{title}</Button></td>
+                <tr id="infoRow" key={id}>
+                  <td id = "title"><Button variant="contrast" onClick={() =>{displayCard({id})}}>{title}</Button></td>
                   <td id = "description">{description}</td>
                 </tr>
               );
@@ -45,10 +45,10 @@ function CheckAllCardsPage() {
       CardService.get(id).then((response) => {
         if(response.status === 200){
           setActiveCard(
-            <Container>
-              <Row>
-                <Col><ActiveCard data={response.data}/></Col>
-                <Col><Button style={{position: "absolute"}} onClick={()=>{setActiveCard([])}}><ImCross/></Button></Col>
+            <Container fluid>
+              <Row fluid>
+                <Col ><ActiveCard data={response.data}/></Col>
+                <Col xs={3}><Button variant="main" onClick={()=>{setActiveCard([])}}><ImCross/></Button></Col>
               </Row>
             </Container>
           );
@@ -59,19 +59,20 @@ function CheckAllCardsPage() {
     }
 
     return (
-        <Row>
-          <Col>
-            <table id = "cards">
+        <Row >
+          <Col xs={5}>
+            <table id="mainTable">
+              <thead>
+                <tr id="headRow">
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+              </thead>
               <tbody>
-                  <tr>
-                      <th>Title</th>
-                      <th>Description</th>
-                  </tr>
-                  {prepareCardsTableElements()}
+                {prepareCardsTableElements()}
               </tbody>
             </table>
-            <Button id = "createCardButton" href="/create">Create a new Card</Button> 
-            
+            <Button variant="main" href="/create">Create a new Card</Button> 
           </Col>
           <Col>
             {activeCard}

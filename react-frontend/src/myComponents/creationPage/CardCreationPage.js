@@ -4,7 +4,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 import CardService  from '../../services/card.service.js';
-import { Container, Toast } from 'react-bootstrap';
+import { Container, Toast, Button} from 'react-bootstrap';
+
+import {BsPlusLg} from 'react-icons/bs';
+import {AiOutlineMinus} from 'react-icons/ai';
 
 function CardCreationPage(){
 
@@ -12,6 +15,15 @@ function CardCreationPage(){
     const [inputList, setInputList] = React.useState([{ paragraphTitle: "", paragraphContent: "" }]);
 
     var card;
+
+    // window.addEventListener('keydown',function(e){
+    //     if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){
+    //         if(e.target.nodeName=='INPUT'&&e.target.type=='text'){
+    //             e.preventDefault();
+    //             return false;
+    //         }
+    //     }
+    // },true);
 
     /** form add/remove input methods **/
 
@@ -82,7 +94,14 @@ function CardCreationPage(){
 
       const onSubmit = (data) => {         
         card=data;
-        card.content=inputList;
+        let usefullcontent  = [];
+        for(let i=0; i<inputList.length; i++){
+
+            if((inputList[i].paragraphTitle !== "") || (inputList[i].paragraphContent !== "")){
+                usefullcontent.push(inputList[i]);
+            }
+        }
+        card.content=usefullcontent;
         console.log(JSON.stringify(card));
         save(card);
       }; 
@@ -90,29 +109,32 @@ function CardCreationPage(){
       console.log(watch("title")); // you can watch individual input by pass the name of the input
 
       return (
-        <Container>
+        <Container fluid>
             <h1 id="wdylt">What did you learn today?</h1>
             
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                 <h2>Title of the Card</h2>
-                <input defaultValue="title" key={ 'title'} {...register("title", { required: true })} />
+                <input placeholder="Title" key={ 'title'} {...register("title", { required: true })} />
                 {errors.exampleRequired && <p id="required">This field is required!</p>}
             
-                <h2>Descrition of the Card</h2>
-                <input defaultValue="desc" key={ 'desc'} {...register("description", { required: true })} />
+                <h2>Description of the Card</h2>
+                <textarea placeholder="Description" id="content" key={ 'desc'} {...register("description", { required: true })} />
                 {errors.exampleRequired && <p id="required">This field is required!</p>}
+                
+                <h2>Content of the Card</h2>
 
                 {inputList.map((x, i) => {
 
                     return (
-                    <div className="box" key={ 'section-${ i }'}>
-                        <input key={ 'sectionTitle-${ i }'}
+                    <div className="box" key={"section-"+{i}}>
+                        <input
                         name="paragraphTitle"
                         placeholder="Section Title"
                         value={x.title}
                         onChange={e => handleInputChange(e, i)}
                         />
-                        <input key={ 'sectionDesc-${ i }'}
+                        <textarea 
+                        id="content"
                         className="ml10"
                         name="paragraphContent"
                         placeholder="Section Content"
@@ -120,14 +142,14 @@ function CardCreationPage(){
                         onChange={e => handleInputChange(e, i)}
                         />
                         <div className="btn-box">
-                            {inputList.length !== 1 && <button className="mr10" onClick={() => handleRemoveClick(i)}>Remove section</button>}
-                            {inputList.length - 1 === i && <button onClick={handleAddClick}>Add section</button>}
+                            {inputList.length !== 1 && <Button variant="danger" style={{marginLeft: "20px", marginBottom: "10px"}} className="mr10" onClick={() => handleRemoveClick(i)}><AiOutlineMinus/></Button>}
+                            {inputList.length - 1 === i && <Button variant="success" style={{marginLeft: "20px", marginBottom: "10px"}}onClick={handleAddClick}><BsPlusLg/></Button>}
                         </div>
                     </div>
                     );
                 })}
-                <input type="submit" />
                 {content}
+                <input value="Create Card" type="submit"/>
             </form>
         </Container>
       );

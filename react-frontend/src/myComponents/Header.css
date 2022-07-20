@@ -3,20 +3,24 @@
     --secondary_color: none;
     --third_color: none;
     --fourth_color: none;
+    --constrast_color: none;
     --intermediate_color: none;
     --gradient: none;
   }
   
 #headerContainer {
-    /* background-color: blue; */
     width: 100%;
-    /* background: #8e44ad; */
 }
 
 #NavLink:hover {
-    background: var(--gradient);
+    color: var(--constrast_color);
+    /* background: var(--gradient);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
+}
+
+#NavLink:active {
+    color: var(--constrast_color);
 }
 
 .navlink{
@@ -51,8 +55,8 @@
 }
 
 #logo {
-    width: auto;
-    height: 90px;
+    width: 50%;
+    height: auto;
     opacity: 1;
 }
 

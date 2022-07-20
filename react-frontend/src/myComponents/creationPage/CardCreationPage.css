@@ -3,6 +3,7 @@
   --secondary_color: none;
   --third_color: none;
   --fourth_color: none;
+  --constrast_color: none;
   --intermediate_color: none;
   --gradient: none;
 }
@@ -41,17 +42,20 @@ body {
     content: "⚠ ";
   }
   
-  /* input {
+  input, textarea{
     display: block;
     box-sizing: border-box;
     width: 100%;
     border-radius: 4px;
-    border: 1px solid white;
+    border: 1.5px solid var(--primary_color);
     padding: 10px 15px;
     margin-bottom: 10px;
     font-size: 14px;
-  } */
+  }
   
+  #content {
+    height: 150px;
+  }
   /* label {
     line-height: 2;
     text-align: left;
@@ -68,18 +72,20 @@ body {
     background: var(--primary_color);
     color: white;
     text-transform: uppercase;
-    border: none;
     margin-top: 40px;
     padding: 20px;
     font-size: 16px;
-    font-weight: 100;
+    font-weight: 300;
     letter-spacing: 10px;
+    transition-duration: 1s;
   }
   
   button[type="submit"]:hover,
   input[type="submit"]:hover {
     transition-duration: 1s;
-    background: var(--gradient);
+    color: black;
+    background: var(--constrast_color);
+    border: none;
   }
   
   button[type="submit"]:active,
@@ -110,31 +116,53 @@ body {
     margin: 0 auto;
   }
   
-  /* button[type="button"] {
-    display: block;
-    appearance: none;
-    background: #333;
-    color: white;
-    border: none;
+  .btn-contrast{
+    background-color: var(--constrast_color);
+    text-align: center;
     text-transform: uppercase;
-    padding: 10px 20px;
-    border-radius: 4px;
-  } */
+    border-radius: 20px;
+    opacity: 1!important;
+    color: black;
+  }
+
+  .btn-contrast:hover{
+    background-color: var(--primary_color);
+    color: white;
+  }
+
+  .btn-contrast:disabled {
+    background-color: var(--intermediate_color);
+  }
+
+  .btn-main{
+    background-color: var(--primary_color);
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 10%;
+    margin-left: "auto";
+    margin-right: "auto";
+  }
+
+  .btn-main:hover{
+    background-color: var(--secondary_color);
+    color: white;
+  }
+
+  .btn-main:disabled {
+    background-color: var(--intermediate_color);
+  }
+
+
+  /* .accordion-button {
+    background-color: var(--secondary_color);
+  }
+   */
   
   hr {
     margin-top: 30px;
   }
-  
-  /* button {
-    display: block;
-    appearance: none;
-    margin-top: 40px;
-    border: 1px solid #333;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    border-radius: 4px;
-  } */
   
   #required {
     color: red;

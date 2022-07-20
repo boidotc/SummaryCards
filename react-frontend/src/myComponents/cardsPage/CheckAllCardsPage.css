@@ -1,65 +1,37 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+:root{
+  --primary_color: none;
+  --secondary_color: none;
+  --third_color: none;
+  --fourth_color: none;
+  --constrast_color: none;
+  --intermediate_color: none;
+  --gradient: none;
 }
 
-#createCardButton {
-  background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%);
-  margin: 10px;
-  padding: 15px 45px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;            
-  box-shadow: 0 0 2px #eee;
-  border-radius: 10px;
-  display: block;
-  border: none;
-  margin-top: 40px;
-  padding: 20px;
-  font-size: 16px;
-  font-weight: 100;
-  letter-spacing: 10px;
-}
+   #infoRow:nth-child(even){background-color: rgba(255, 255, 255, 0.13);}
+   #infoRow:nth-child(odd){background-color: rgba(66, 66, 66, 0.247)}
+   #infoRow:hover {background-color: rgba(255,255,255,0.2);}
 
-#createCardButton:hover  {
-  cursor: pointer;
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-}
-
-table{
-  background-color: transparent;
- }
- td,  th {
-    /* border: 1px solid #ddd; */
-    padding: 8px;
+   table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    margin-bottom: 20px;
   }
   
-   tr:nth-child(even){background-color: #f2f2f2;}
-   tr:nth-child(odd){background-color: white;}
-   tr:hover {background-color: #ddd;}
-  
-   th {
-    color: white;
-    padding-top: 12px;
-    padding-bottom: 12px;
+  th,
+  td {
+    padding: 15px;
+    color: #fff;
     text-align: left;
-    background-color: #ec5990;
   }
-
-#id {
-  width:400px;
-}
-#title {
-  font-weight: bold ;
-}
-
-/* a{
-  font-style: normal;
-  text-emphasis: none;
-  text-emphasis-color: black;
-} */
+  
+  #headRow {
+    
+    background-color: rgba(39, 51, 160, 0.553);
+  }
+  
+  tbody td {
+      position: relative;
+  }
+ 

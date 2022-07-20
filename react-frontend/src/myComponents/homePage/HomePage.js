@@ -15,7 +15,7 @@ function HomePage(){
             {setThemeColors()}
             <Row id = "presentationRow">
                 <Col>
-                    <Card style={{ width: '550px'}} id = "presentationCard">
+                    <Card style={{ width: '80%'}} id = "presentationCard">
                         {/* <Card.Img variant="top" src={require("../logos/logo-card.png")} style={{ width: '95%', height: "auto",marginLeft: "auto", marginRight: "auto", marginTop: "2.5%" }}/> */}
                         <Card.Body>
                             <Card.Title><h1>Did you say <span id="emphasized">Mind Cards</span>?</h1></Card.Title>
@@ -57,11 +57,11 @@ function HomePage(){
                         </Card.Body>
                         <Card.Body>
                             <div className="d-grid gap-2">
-                                <Button variant="outline-success" size="lg" href="/cards">
-                                    Start browsing!
-                                </Button>
-                                <Button variant="outline-primary" size="lg" href="/create">
+                                <Button variant="success" size="lg" href="/create">
                                     Create a card
+                                </Button>
+                                <Button variant="main" size="lg" href="/cards">
+                                    Start browsing!
                                 </Button>
                             </div>
                         </Card.Body>

@@ -92,45 +92,45 @@ export default function ActiveCard(data){
 
     function displayContentMode(){
         if(mode === "normal"){
+            let description = data.data.description.replace(/(?:\r\n|\r|\n)/g, '<br/>');
             return (
-                <Container>
+                <Container fluid>
+                    <Card.Header><h1>{data.data.title}</h1></Card.Header>
                     <Card.Body>
-                    <Card.Title><h1>{data.data.title}</h1></Card.Title>
-                    <Card.Text>
-                        {data.data.description}
-                    </Card.Text>
+                    <Card.Title>{description}</Card.Title>
                     <Accordion flush>
                     {data.data.content.map((x, i) => {
+                        x.paragraphContent.replace(/(?:\r\n|\r|\n)/g, '<br/>');
                         return (
-                            <Accordion.Item key={"ai"+i} eventKey={i}>
+                            <Accordion.Item variant="main" key={"ai"+i} eventKey={i}>
                                 <Accordion.Header>{x.paragraphTitle}</Accordion.Header>
-                                <Accordion.Body>{x.paragraphContent}</Accordion.Body>
+                                <Accordion.Body>{x.paragraphContent}<br/>{x.paragraphTitle}</Accordion.Body>
                             </Accordion.Item>
                         );
                     })}
                     </Accordion>
                 </Card.Body>
                 <Row>
-                    <Col style={{width: "33%"}}>
-                        <Button>Generate PDF</Button>
+                    <Col style={{border: "solid black", alignContent: "center"}}>
+                        <Button variant= "main">Generate PDF</Button>
                     </Col>
-                    <Col style={{width: "33%"}}>
-                        <Button onClick={() =>{
+                    <Col style={{border: "solid lightgrey", alignContent: "center"}}>
+                        <Button fluid variant= "main" onClick={() =>{
                             setMode("edit");
                             setInputList(data.data.content);
                             setRandKey(Math.random());
                             document.querySelectorAll("button").forEach((button) =>{button.disabled = true});
                         }}><AiFillEdit/></Button>
                     </Col>
-                    <Col style={{width: "33%"}}>
-                        <Button style={{backgroundColor: "red", marginLeft: "80px"}} onClick={() =>{onDelete(data.data.id)}}><BsFillTrashFill/></Button>
+                    <Col>
+                        <Button variant= "main" style={{backgroundColor: "red", marginLeft: "auto", marginRight: "auto"}} onClick={() =>{onDelete(data.data.id)}}><BsFillTrashFill/></Button>
                     </Col>
                 </Row>
             </Container>
             );
         } else {
             return (
-                <Container>
+                <Container fluid>
                     <Card.Body>
                         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                             <Card.Title>
@@ -140,7 +140,7 @@ export default function ActiveCard(data){
                                 </div>
                             </Card.Title>
                             <Card.Text>
-                                <input value={desc} key={ 'desc'} onChange={handleChange()}{...register("description", { required: true })} />
+                                <textarea value={desc} key={ 'desc'} onChange={handleChange()}{...register("description", { required: true })} />
                                 {errors.exampleRequired && <p id="required">This field is required!</p>}
                             </Card.Text>
                             {inputList.map((x, i) => {
@@ -152,7 +152,7 @@ export default function ActiveCard(data){
                                         value={x.title}
                                         onChange={e => handleInputChange(e, i)}
                                         />
-                                        <input
+                                        <textarea
                                         className="ml10"
                                         name="paragraphContent"
                                         defaultValue={x.paragraphContent}
@@ -160,19 +160,19 @@ export default function ActiveCard(data){
                                         onChange={e => handleInputChange(e, i)}
                                         />
                                         <div className="btn-box">
-                                            {inputList.length !== 1 && <button className="mr10" onClick={() => handleRemoveClick(i)}>Remove section</button>}
-                                            {inputList.length - 1 === i && <button onClick={handleAddClick}>Add section</button>}
+                                            {inputList.length !== 1 && <Button variant="danger" style={{marginLeft: "20px", marginBottom: "10px"}} className="mr10" onClick={() => handleRemoveClick(i)}>Remove section</Button>}
+                                            {inputList.length - 1 === i && <Button variant="success" style={{marginLeft: "20px", marginBottom: "10px"}}onClick={handleAddClick}>Add section</Button>}
                                         </div>
                                     </div>                 
                                 );
                             })}
                             <Row>
-                                <Col style={{width: "33%"}}>
+                                <Col /*style={{width: "33%"}}*/>
+                                    <input type="submit"/>
                                     <Button onClick={() =>{
                                         setMode("normal");
                                         document.querySelectorAll("button").forEach((button) =>{button.disabled = false});
                                     }}>Exit editing</Button>
-                                    <input type="submit"/>
                                 </Col>
                             </Row>
                         </form>
@@ -184,7 +184,7 @@ export default function ActiveCard(data){
     }
 
     return(
-        <Card style={{ width: '550px'}} id = "presentationCard">
+        <Card variant="danger" id = "presentationCard">
             {displayContentMode()}
         </Card>
     );
