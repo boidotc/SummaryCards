@@ -3,7 +3,7 @@
   --secondary_color: none;
   --third_color: none;
   --fourth_color: none;
-  --constrast_color: none;
+  --contrast_color: none;
   --intermediate_color: none;
   --gradient: none;
 }
@@ -84,7 +84,7 @@ body {
   input[type="submit"]:hover {
     transition-duration: 1s;
     color: black;
-    background: var(--constrast_color);
+    background: var(--contrast_color);
     border: none;
   }
   
@@ -117,21 +117,23 @@ body {
   }
   
   .btn-contrast{
-    background-color: var(--constrast_color);
+    background-color: none;
+    border-color: var(--contrast_color);
     text-align: center;
     text-transform: uppercase;
     border-radius: 20px;
     opacity: 1!important;
-    color: black;
+    color: var(--contrast_color);
   }
 
   .btn-contrast:hover{
-    background-color: var(--primary_color);
-    color: white;
+    background-color: var(--contrast_color);
+    color: var(--third_color);
   }
 
   .btn-contrast:disabled {
-    background-color: var(--intermediate_color);
+    border-color: var(--intermediate_color);
+    color: var(--intermediate_color);
   }
 
   .btn-main{
@@ -140,9 +142,6 @@ body {
     text-transform: uppercase;
     border-radius: 5px;
     color: white;
-    margin-bottom: 10%;
-    margin-left: "auto";
-    margin-right: "auto";
   }
 
   .btn-main:hover{
@@ -153,12 +152,6 @@ body {
   .btn-main:disabled {
     background-color: var(--intermediate_color);
   }
-
-
-  /* .accordion-button {
-    background-color: var(--secondary_color);
-  }
-   */
   
   hr {
     margin-top: 30px;

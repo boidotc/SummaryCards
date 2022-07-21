@@ -16,7 +16,7 @@ function Header() {
             <Row id = "HeaderRow">
                 <Col id = "titleCol">
                     <Nav.Link id = "filter">
-                        <Image id = "logo" href="/" src={require("./logos/image2.png")}/>
+                        <Image id = "logo" src={require("./logos/image2.png")}/>
                     </Nav.Link>
                 </Col>
                 <Col id = "navbarCol" >

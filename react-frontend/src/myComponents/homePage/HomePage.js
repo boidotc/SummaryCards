@@ -16,55 +16,54 @@ function HomePage(){
             <Row id = "presentationRow">
                 <Col>
                     <Card style={{ width: '80%'}} id = "presentationCard">
-                        {/* <Card.Img variant="top" src={require("../logos/logo-card.png")} style={{ width: '95%', height: "auto",marginLeft: "auto", marginRight: "auto", marginTop: "2.5%" }}/> */}
-                        <Card.Body>
-                            <Card.Title><h1>Did you say <span id="emphasized">Mind Cards</span>?</h1></Card.Title>
-                            <Card.Text>
-                                    Mind Cards is an app to allow you to learn new 
-                                    subjects and make cards in order to remember them more easily! 
-                                    These cards are stored on a database and therefore accessible from anywhere ;)
-                            </Card.Text>
-                        </Card.Body>
-                        <Accordion /*activeKey={"0"}*/>
-                            <Accordion.Item eventKey="0">
-                                <Accordion.Header>Paragraph 1</Accordion.Header>
-                                <Accordion.Body>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                culpa qui officia deserunt mollit anim id est laborum.
-                                </Accordion.Body>
-                            </Accordion.Item>
-                            <Accordion.Item eventKey="1">
-                                <Accordion.Header>Paragraph 2</Accordion.Header>
-                                <Accordion.Body>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                culpa qui officia deserunt mollit anim id est laborum.
-                                </Accordion.Body>
-                            </Accordion.Item>
-                        </Accordion>
-                        <Card.Body>
-                            <Card.Link href="https://www.verywellmind.com/how-to-become-a-more-effective-learner-2795162">How to learn</Card.Link>
-                            <Card.Link href="https://hbr.org/2016/03/learning-to-learn">Learning to learn (HBR)</Card.Link>
-                        </Card.Body>
-                        <Card.Body>
-                            <div className="d-grid gap-2">
-                                <Button variant="success" size="lg" href="/create">
-                                    Create a card
-                                </Button>
-                                <Button variant="main" size="lg" href="/cards">
-                                    Start browsing!
-                                </Button>
-                            </div>
-                        </Card.Body>
+                        <Container fluid id="cardBackground">
+                            {/* <Card.Img variant="top" src={require("../logos/logo-card.png")} style={{ width: '95%', height: "auto",marginLeft: "auto", marginRight: "auto", marginTop: "2.5%" }}/> */}
+                            <Card.Body>
+                                <Card.Title><h1>Did you say <span id="emphasized">Mind Cards</span>?</h1></Card.Title>
+                                <Card.Text>
+                                        Mind Cards is an app to allow you to learn new 
+                                        subjects and make cards in order to remember them more easily! 
+                                        These cards are stored on a database and therefore accessible from anywhere ;)
+                                </Card.Text>
+                            <Accordion /*activeKey={"0"}*/>
+                                <Accordion.Item eventKey="0">
+                                    <Accordion.Header>Paragraph 1</Accordion.Header>
+                                    <Accordion.Body>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                    aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                    culpa qui officia deserunt mollit anim id est laborum.
+                                    </Accordion.Body>
+                                </Accordion.Item>
+                                <Accordion.Item eventKey="1">
+                                    <Accordion.Header>Paragraph 2</Accordion.Header>
+                                    <Accordion.Body>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                    aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                    culpa qui officia deserunt mollit anim id est laborum.
+                                    </Accordion.Body>
+                                </Accordion.Item>
+                            </Accordion>
+                                <Card.Link href="https://www.verywellmind.com/how-to-become-a-more-effective-learner-2795162">How to learn</Card.Link>
+                                <Card.Link href="https://hbr.org/2016/03/learning-to-learn">Learning to learn (HBR)</Card.Link>
+                            
+                                <div className="d-grid gap-2">
+                                    <Button variant="success" size="lg" href="/create">
+                                        Create a card
+                                    </Button>
+                                    <Button variant="main" size="lg" href="/cards">
+                                        Start browsing!
+                                    </Button>
+                                </div>
+                            </Card.Body>
+                        </Container>
                     </Card>
                 </Col>
                 <Col>

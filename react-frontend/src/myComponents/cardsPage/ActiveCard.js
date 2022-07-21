@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Card, Col, Row, Accordion, Container } from "react-bootstrap";
+import { Button, Card, Col, Row, Accordion, Container, ButtonGroup } from "react-bootstrap";
 import CardService  from '../../services/card.service';
 import {AiFillEdit} from "react-icons/ai";
 import {BsFillTrashFill} from "react-icons/bs";
@@ -94,43 +94,47 @@ export default function ActiveCard(data){
         if(mode === "normal"){
             let description = data.data.description.replace(/(?:\r\n|\r|\n)/g, '<br/>');
             return (
-                <Container fluid>
-                    <Card.Header><h1>{data.data.title}</h1></Card.Header>
-                    <Card.Body>
-                    <Card.Title>{description}</Card.Title>
-                    <Accordion flush>
-                    {data.data.content.map((x, i) => {
-                        x.paragraphContent.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-                        return (
-                            <Accordion.Item variant="main" key={"ai"+i} eventKey={i}>
-                                <Accordion.Header>{x.paragraphTitle}</Accordion.Header>
-                                <Accordion.Body>{x.paragraphContent}<br/>{x.paragraphTitle}</Accordion.Body>
-                            </Accordion.Item>
-                        );
-                    })}
-                    </Accordion>
-                </Card.Body>
-                <Row>
-                    <Col style={{border: "solid black", alignContent: "center"}}>
-                        <Button variant= "main">Generate PDF</Button>
-                    </Col>
-                    <Col style={{border: "solid lightgrey", alignContent: "center"}}>
-                        <Button fluid variant= "main" onClick={() =>{
-                            setMode("edit");
-                            setInputList(data.data.content);
-                            setRandKey(Math.random());
-                            document.querySelectorAll("button").forEach((button) =>{button.disabled = true});
-                        }}><AiFillEdit/></Button>
-                    </Col>
-                    <Col>
-                        <Button variant= "main" style={{backgroundColor: "red", marginLeft: "auto", marginRight: "auto"}} onClick={() =>{onDelete(data.data.id)}}><BsFillTrashFill/></Button>
-                    </Col>
-                </Row>
-            </Container>
+                <Card id = "presentationCard">
+                    <Container fluid id="cardBackground">
+                        <Card.Body>
+                        <Card.Title><h1>{data.data.title}</h1></Card.Title>
+                        <Card.Title style={{textAlign: "center"}}>{description}</Card.Title>
+                        <Accordion>
+                        {data.data.content.map((x, i) => {
+                            x.paragraphContent.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+                            return (
+                                <Accordion.Item variant="main" key={"ai"+i} eventKey={i}>
+                                    <Accordion.Header>{x.paragraphTitle}</Accordion.Header>
+                                    <Accordion.Body>{x.paragraphContent}<br/>{x.paragraphTitle}</Accordion.Body>
+                                </Accordion.Item>
+                            );
+                        })}
+                        </Accordion>
+                        <Row style={{marginTop: "20px"}}>
+                            <Col>
+                                <Button variant= "main">Generate PDF</Button>
+                            </Col>
+
+                            <Col>
+                                <ButtonGroup style={{float: "right"}}>
+                                    <Button variant= "outline-success" onClick={() =>{
+                                        setMode("edit");
+                                        setInputList(data.data.content);
+                                        setRandKey(Math.random());
+                                        document.querySelectorAll("button").forEach((button) =>{button.disabled = true});
+                                    }}><AiFillEdit/></Button>
+                                    <Button variant= "outline-danger" onClick={() =>{onDelete(data.data.id)}}><BsFillTrashFill/></Button>
+                                </ButtonGroup>
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                    
+                </Container>
+            </Card>
             );
         } else {
             return (
-                <Container fluid>
+                <Container fluid id="cardBackground">
                     <Card.Body>
                         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                             <Card.Title>
@@ -160,8 +164,8 @@ export default function ActiveCard(data){
                                         onChange={e => handleInputChange(e, i)}
                                         />
                                         <div className="btn-box">
-                                            {inputList.length !== 1 && <Button variant="danger" style={{marginLeft: "20px", marginBottom: "10px"}} className="mr10" onClick={() => handleRemoveClick(i)}>Remove section</Button>}
-                                            {inputList.length - 1 === i && <Button variant="success" style={{marginLeft: "20px", marginBottom: "10px"}}onClick={handleAddClick}>Add section</Button>}
+                                            {inputList.length !== 1 && <Button variant="outline-danger" style={{marginLeft: "20px", marginBottom: "10px"}} className="mr10" onClick={() => handleRemoveClick(i)}>Remove section</Button>}
+                                            {inputList.length - 1 === i && <Button variant="outline-success" style={{marginLeft: "20px", marginBottom: "10px"}}onClick={handleAddClick}>Add section</Button>}
                                         </div>
                                     </div>                 
                                 );
@@ -177,14 +181,13 @@ export default function ActiveCard(data){
                             </Row>
                         </form>
                     </Card.Body>
-                    
-                </Container>
+                </Container>                 
             );
         }
     }
 
     return(
-        <Card variant="danger" id = "presentationCard">
+        <Card id = "presentationCard">
             {displayContentMode()}
         </Card>
     );

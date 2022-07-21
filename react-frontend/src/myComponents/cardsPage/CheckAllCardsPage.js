@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {Button, Row, Col, Container, Table} from 'react-bootstrap';
+import {Button, Row, Col, Container} from 'react-bootstrap';
 import {ImCross} from "react-icons/im";
 import './CheckAllCardsPage.css';
 

@@ -3,7 +3,7 @@
     --secondary_color: none;
     --third_color: none;
     --fourth_color: none;
-    --constrast_color: none;
+    --contrast_color: none;
     --intermediate_color: none;
     --gradient: none;
   }
@@ -13,14 +13,14 @@
 }
 
 #NavLink:hover {
-    color: var(--constrast_color);
+    color: var(--contrast_color);
     /* background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
 }
 
 #NavLink:active {
-    color: var(--constrast_color);
+    color: var(--contrast_color);
 }
 
 .navlink{
