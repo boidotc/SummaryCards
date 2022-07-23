@@ -46,7 +46,7 @@ function CheckAllCardsPage() {
         if(response.status === 200){
           setActiveCard(
             <Container fluid>
-              <Row fluid>
+              <Row>
                 <Col ><ActiveCard data={response.data}/></Col>
                 <Col xs={3}><Button variant="main" onClick={()=>{setActiveCard([])}}><ImCross/></Button></Col>
               </Row>

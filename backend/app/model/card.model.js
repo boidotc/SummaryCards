@@ -6,7 +6,6 @@ module.exports = mongoose => {
       description: String,
       content:[mongoose.Schema.Types.Mixed],
       path_pdf: String,
-      path_content: String,
       topics: [String],
       keywords: [String],
       references: [String]

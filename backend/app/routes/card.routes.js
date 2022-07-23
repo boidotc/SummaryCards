@@ -24,5 +24,8 @@ module.exports = app => {
   // // Create new card
   // router.delete("/", cards.deleteAll);
 
+  // Create PDF card
+  router.get("/pdf/:id", cards.getPDF);
+
   app.use("/api/cards", router);
 };

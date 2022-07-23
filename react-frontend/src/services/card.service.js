@@ -27,6 +27,15 @@ class CardService {
     return axios.delete(API_URL);
   }
 
+  getPdf(id) {
+    return axios.get(API_URL+"pdf/"+id, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      responseType: 'arraybuffer'
+    });
+  }
+
 }
 
 export default new CardService();

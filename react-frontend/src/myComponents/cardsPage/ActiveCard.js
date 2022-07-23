@@ -4,6 +4,7 @@ import { Button, Card, Col, Row, Accordion, Container, ButtonGroup } from "react
 import CardService  from '../../services/card.service';
 import {AiFillEdit} from "react-icons/ai";
 import {BsFillTrashFill} from "react-icons/bs";
+import { saveAs } from 'file-saver';
 
 export default function ActiveCard(data){
 
@@ -28,6 +29,21 @@ export default function ActiveCard(data){
                 }
             });
             setTimeout(() => {  }, 5000);
+    }
+
+    function onGetPdf(data){
+        CardService.getPdf(data).then(
+            (response) => {
+                if(response.status === 200){
+                    const blob = new Blob([response.data], { type: 'application/pdf' })
+                    saveAs(blob, data+".pdf")
+                    // fileDownload(response.data, data+".pdf");
+                }
+                else {
+                    console.log("An issue occured: "+response);
+                }
+            }
+        );
     }
 
      /** form add/remove input methods **/
@@ -105,14 +121,14 @@ export default function ActiveCard(data){
                             return (
                                 <Accordion.Item variant="main" key={"ai"+i} eventKey={i}>
                                     <Accordion.Header>{x.paragraphTitle}</Accordion.Header>
-                                    <Accordion.Body>{x.paragraphContent}<br/>{x.paragraphTitle}</Accordion.Body>
+                                    <Accordion.Body>{x.paragraphContent}</Accordion.Body>
                                 </Accordion.Item>
                             );
                         })}
                         </Accordion>
                         <Row style={{marginTop: "20px"}}>
                             <Col>
-                                <Button variant= "main">Generate PDF</Button>
+                                <Button variant= "main" onClick={() =>{onGetPdf(data.data.id)}}>Open PDF</Button>
                             </Col>
 
                             <Col>

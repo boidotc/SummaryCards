@@ -80,7 +80,10 @@ function CardCreationPage(){
                      </Toast>
                 );
             }
-            setTimeout(() => { setContent(); }, 5000)      
+            setTimeout(() => { 
+                setContent();
+                window.location.replace("/cards");
+             }, 2000)      
         }
     }
 
@@ -102,7 +105,6 @@ function CardCreationPage(){
             }
         }
         card.content=usefullcontent;
-        console.log(JSON.stringify(card));
         save(card);
       }; 
     

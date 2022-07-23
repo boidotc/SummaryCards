@@ -128,7 +128,7 @@ body {
 
   .btn-contrast:hover{
     background-color: var(--contrast_color);
-    color: var(--third_color);
+    color: black;
   }
 
   .btn-contrast:disabled {

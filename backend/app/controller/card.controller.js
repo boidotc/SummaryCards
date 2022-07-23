@@ -1,5 +1,8 @@
 const db = require("../model");
 const Card = db.card;
+const PDFDocument = require('pdfkit');
+var fs = require('fs');
+var path = require('path');
 
 exports.create = (req, res) => {
   if (!req.body.title) {
@@ -16,7 +19,6 @@ exports.create = (req, res) => {
     keywords: req.body.keywords ? req.body.keywords : [],
     references: req.body.references ? req.body.references : [],
     path_pdf: req.body.path_pdf ? req.body.path_pdf : "",
-    path_content: req.body.path_content ? req.body.path_content : "",
   });
 
   card
@@ -112,3 +114,103 @@ exports.update = (req, res) => {
       });
     });
 };
+
+// Get or create PDF card 
+exports.getPDF = (req, res) => {
+  const id = req.params.id;
+
+
+  Card.findById(id)
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Card with id " + id });
+      else {
+        const doc = new PDFDocument({autoFirstPage:false});
+
+        // Define default page
+        doc.on('pageAdded', () => {
+          // background gradient
+          let grad = doc.linearGradient(0, 0, 610, 800);
+          grad.stop(0, '#8EC5FC')
+              .stop(1, '#E0C3FC');
+          doc.rect(0, 0, 610, 800);
+          doc.fill(grad);
+
+          // MC stamp
+          // doc.image("stamps/iconblack.png", 5, 5); // TODO: continue to improve
+
+          // content support container
+          let dist = 40;
+          doc.rect(dist, dist, 570-dist, 765-dist);
+          doc.opacity(0.363).fill("#3d3d3d");
+          doc.fillColor('white').opacity(1);
+        });
+        let filename = id+'.pdf';
+        let pdfPath = 'blobstore/'+filename;
+        doc.pipe(fs.createWriteStream(pdfPath)); // write to PDF
+        doc.addPage();
+
+        /** Start card layout **/ 
+        // Title
+        doc.fillColor('white').opacity(1).fontSize(35).text(data.title, {
+          align: 'center',
+        }).moveDown();
+
+        //Topics (TBD v2)
+
+        // Description
+        doc.fillColor('white').opacity(1).fontSize(20).text(data.description, {
+          align: 'center',
+        }).moveDown();
+        
+        // Content 
+        for(let i=0;i<data.content.length;i++){
+          doc.fillColor('white').opacity(1).fontSize(16).text(data.content[i].paragraphTitle, {
+            underline: true,
+            align: 'justify',
+          }).moveDown();
+          doc.fillColor('white').opacity(1).fontSize(12).text(data.content[i].paragraphContent, {
+            align: 'justify',
+          }).moveDown();
+        }
+        
+        
+        doc.end();
+
+        // Update the pdf path attribute
+        data.path_pdf = pdfPath;
+        Card.findByIdAndUpdate(id,data, { useFindAndModify: false })
+        .then(data => {
+          if (!data) {
+            res.status(404).send({
+              message: `Cannot update Card with id=${id}. Maybe Card was not found!`
+            });
+          } else {
+            var options = {
+              root: path.join("./")
+            };
+            res.download(pdfPath, filename, function (err) {
+              if (err) {
+                console.log(err);
+            } else {
+                console.log('Sent:', filename);
+            }
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).send({
+            message: "Error updating Card with id=" + id
+          });
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .send({ message: "Error retrieving Card with id=" + id});
+    });
+
+  
+}
