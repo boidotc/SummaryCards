@@ -16,7 +16,6 @@ exports.create = (req, res) => {
     description: req.body.description,
     content: req.body.content ? req.body.content : {},
     topics: req.body.topics ? req.body.topics : [],
-    keywords: req.body.keywords ? req.body.keywords : [],
     references: req.body.references ? req.body.references : [],
     path_pdf: req.body.path_pdf ? req.body.path_pdf : "",
   });
@@ -156,8 +155,22 @@ exports.getPDF = (req, res) => {
           align: 'center',
         }).moveDown();
 
-        //Topics (TBD v2)
-
+        //Topics (v2) 
+        if (data.topics.length > 0){
+          doc.fillColor('white').opacity(1).fontSize(16).text("Topics:", {
+            underline: true,
+            align: 'left'
+          }).moveDown();
+          let topicList = "";
+          for(let i=0;i<data.topics.length;i++){
+            topicList += data.topics[i]
+            if (i!=(data.topics.length-1)) {
+              topicList += " - ";
+            }
+          }
+          doc.fillColor('white').opacity(1).fontSize(12).text(topicList).moveDown().moveDown();
+        }
+        
         // Description
         doc.fillColor('white').opacity(1).fontSize(20).text(data.description, {
           align: 'center',
@@ -193,7 +206,7 @@ exports.getPDF = (req, res) => {
               if (err) {
                 console.log(err);
             } else {
-                console.log('Sent:', filename);
+                //console.log('Sent:', filename);
             }
             });
           }

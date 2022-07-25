@@ -2,17 +2,20 @@ import './CardCreationPage.css';
 
 import React from "react";
 import { useForm } from "react-hook-form";
+import { TagsInput } from "react-tag-input-component";
 
 import CardService  from '../../services/card.service.js';
-import { Container, Toast, Button} from 'react-bootstrap';
 
+import { Container, Toast, Button} from 'react-bootstrap';
 import {BsPlusLg} from 'react-icons/bs';
 import {AiOutlineMinus} from 'react-icons/ai';
+
 
 function CardCreationPage(){
 
     const [content, setContent] = React.useState();
     const [inputList, setInputList] = React.useState([{ paragraphTitle: "", paragraphContent: "" }]);
+    const [topics, setTopics] = React.useState(["example"]);
 
     var card;
 
@@ -96,6 +99,7 @@ function CardCreationPage(){
             }
         }
         card.content=usefullcontent;
+        card.topics = topics;
         save(card);
       }; 
     
@@ -114,6 +118,16 @@ function CardCreationPage(){
                 <textarea placeholder="Description" id="content" key={ 'desc'} {...register("description", { required: true })} />
                 {errors.exampleRequired && <p id="required">This field is required!</p>}
                 
+                <h2>Topics</h2>
+                /* TODO: correct css for tags input */
+                <TagsInput
+                    value={topics}
+                    onChange={setTopics}
+                    name="topics"
+                    placeHolder="Enter topic"
+                />
+
+
                 <h2>Content of the Card</h2>
 
                 {inputList.map((x, i) => {

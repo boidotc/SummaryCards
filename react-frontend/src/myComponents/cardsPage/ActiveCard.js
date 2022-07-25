@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Card, Col, Row, Accordion, Container, ButtonGroup } from "react-bootstrap";
+import { Button, Card, Col, Row, Accordion, Container, ButtonGroup, Badge } from "react-bootstrap";
 import CardService  from '../../services/card.service';
 import {AiFillEdit} from "react-icons/ai";
 import {BsFillTrashFill} from "react-icons/bs";
 import { saveAs } from 'file-saver';
+import { TagsInput } from "react-tag-input-component";
 
 export default function ActiveCard(data){
 
     const [mode, setMode] = React.useState("normal");
     const [inputList, setInputList] = React.useState(data.data.content);
     const [randKey, setRandKey] = React.useState(Math.random());
+    const [topics, setTopics] = React.useState(data.data.topics);
     let title = data.data.title;
     let desc = data.data.description;
 
@@ -77,7 +79,8 @@ export default function ActiveCard(data){
 
       const onSubmit = (data) => { 
         var updatedCard = data;
-        updatedCard.content=inputList;     
+        updatedCard.content=inputList;
+        updatedCard.topics = topics;
         edit(updatedCard);
       };
 
@@ -114,7 +117,35 @@ export default function ActiveCard(data){
                     <Container fluid id="cardBackground">
                         <Card.Body>
                         <Card.Title><h1>{data.data.title}</h1></Card.Title>
-                        <Card.Title style={{textAlign: "center"}}>{description}</Card.Title>
+                        <Container fluid style={{/*border: "solid black",*/ marginBottom:  "15px", alignContent: "start"}}>
+                            {data.data.topics.map((x, i) => {
+                                let variant;
+                                switch (i%4) {
+                                    case 0:
+                                        variant = "primary";
+                                        break;
+                            
+                                    case 1:
+                                        variant = "success";
+                                        break;
+                                    case 2:
+                                        variant = "danger";
+                                        break;
+                            
+                                    case 3:
+                                        variant = "warning";
+                                        break;
+                                
+                                    default:
+                                        variant = "info";
+                                        break;
+                                }
+                                return (
+                                    <Badge pill bg={variant}>{x}</Badge>
+                                )
+                            })}
+                        </Container>
+                        <Card.Title style={{textAlign: "center", marginBottom:  "15px"}}>{description}</Card.Title>
                         <Accordion>
                         {data.data.content.map((x, i) => {
                             x.paragraphContent.replace(/(?:\r\n|\r|\n)/g, '<br/>');
@@ -126,6 +157,7 @@ export default function ActiveCard(data){
                             );
                         })}
                         </Accordion>
+                        
                         <Row style={{marginTop: "20px"}}>
                             <Col>
                                 <Button variant= "main" onClick={() =>{onGetPdf(data.data.id)}}>Open PDF</Button>
@@ -163,6 +195,12 @@ export default function ActiveCard(data){
                                 <textarea value={desc} key={ 'desc'} onChange={handleChange()}{...register("description", { required: true })} />
                                 {errors.exampleRequired && <p id="required">This field is required!</p>}
                             </Card.Text>
+                            <TagsInput
+                                value={topics}
+                                onChange={setTopics}
+                                name="topics"
+                                placeHolder="Edit topics"
+                            />
                             {inputList.map((x, i) => {
                                 return (
                                     <div className="box" key={"div-"+i}>
@@ -186,6 +224,7 @@ export default function ActiveCard(data){
                                     </div>                 
                                 );
                             })}
+                            
                             <Row>
                                 <Col /*style={{width: "33%"}}*/>
                                     <input type="submit"/>
