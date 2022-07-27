@@ -25,7 +25,7 @@ function Header() {
                             <Nav.Link id = "NavLink" href="/">
                                 <HiHome id = "NavLink"/>
                             </Nav.Link>
-                            <Nav.Link id = "NavLink" href="/cards">Browse cards</Nav.Link>
+                            <Nav.Link id = "NavLink" href="/browse">Browse cards</Nav.Link>
                             <Nav.Link id = "NavLink" href="/create">Create a card</Nav.Link>
                         </Nav>
                     </Navbar>

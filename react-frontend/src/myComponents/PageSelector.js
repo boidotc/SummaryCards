@@ -17,7 +17,7 @@ function PageSelector(){
         <BrowserRouter>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/cards" element={<CheckAllCardsPage />} />
+              <Route path="/browse" element={<CheckAllCardsPage />} />
               <Route path="/create" element={<CardCreationPage />} />
             </Routes>
 

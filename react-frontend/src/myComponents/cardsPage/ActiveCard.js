@@ -10,9 +10,20 @@ import { TagsInput } from "react-tag-input-component";
 export default function ActiveCard(data){
 
     const [mode, setMode] = React.useState("normal");
-    const [inputList, setInputList] = React.useState(data.data.content);
+    const [inputList, setInputList] = React.useState(() => {
+        if(data.data.content.length == 0){
+            return [{ paragraphTitle: "", paragraphContent: "" }];
+        } else return data.data.content;
+    });
     const [randKey, setRandKey] = React.useState(Math.random());
     const [topics, setTopics] = React.useState(data.data.topics);
+    // const [links, setLinks] = React.useState(() => {
+    //     if(data.data.references.length == 0){
+    //         return [{link: ""}];
+    //     } else return data.data.references;
+    // });
+
+    
     let title = data.data.title;
     let desc = data.data.description;
 
@@ -70,6 +81,27 @@ export default function ActiveCard(data){
         setInputList([...inputList, { paragraphTitle: "", paragraphContent: "" }]);
     };
 
+    /** links add/remove input methods **/
+
+    // // handle input change
+    // const handleLinkChange = (e, index) => {
+    //     const { name, value } = e.target;
+    //     const list = [...links];
+    //     list[index][name] = value;
+    //     setLinks(list);
+    // };
+
+    // // handle click event of the Remove button
+    // const handleRemoveLinkClick = index => {
+    //     const list = [...links];
+    //     list.splice(index, 1);
+    //     setLinks(list);
+    // };
+
+    // // handle click event of the Add button
+    // const handleAddLinkClick = () => {
+    //     setLinks([...links, {link: ""}]);
+    // };
 
     const {
         register,
@@ -148,7 +180,6 @@ export default function ActiveCard(data){
                         <Card.Title style={{textAlign: "center", marginBottom:  "15px"}}>{description}</Card.Title>
                         <Accordion>
                         {data.data.content.map((x, i) => {
-                            x.paragraphContent.replace(/(?:\r\n|\r|\n)/g, '<br/>');
                             return (
                                 <Accordion.Item variant="main" key={"ai"+i} eventKey={i}>
                                     <Accordion.Header>{x.paragraphTitle}</Accordion.Header>
@@ -157,7 +188,11 @@ export default function ActiveCard(data){
                             );
                         })}
                         </Accordion>
-                        
+                        {data.data.references.map((x, i) => {
+                            return (
+                                <Card.Link href={"http://"+{x}}>{x}</Card.Link>
+                            );
+                        })} 
                         <Row style={{marginTop: "20px"}}>
                             <Col>
                                 <Button variant= "main" onClick={() =>{onGetPdf(data.data.id)}}>Open PDF</Button>
@@ -224,10 +259,26 @@ export default function ActiveCard(data){
                                     </div>                 
                                 );
                             })}
-                            
+                            {/* {links.map((x, i) => {
+                                return (
+                                    <div className="box" key={"references-"+{i}}>
+                                        <input
+                                        name="link"
+                                        placeholder="Link"
+                                        value={x.link}
+                                        onChange={e => handleLinkChange(e, i)}
+                                        />
+                                    <div className="btn-box">
+                                        {links.length !== 1 && <Button variant="danger" style={{marginLeft: "20px", marginBottom: "10px"}} className="mr10" onClick={() => handleRemoveLinkClick(i)}>Remove Link</Button>}
+                                        {links.length - 1 === i && <Button variant="success" style={{marginLeft: "20px", marginBottom: "10px"}}onClick={handleAddLinkClick}>Add Link</Button>}
+                                    </div>
+                                </div>
+                                )
+                            })}
+                             */}
                             <Row>
                                 <Col /*style={{width: "33%"}}*/>
-                                    <input type="submit"/>
+                                    <input type="submit" value="Confirm edit"/>
                                     <Button onClick={() =>{
                                         setMode("normal");
                                         document.querySelectorAll("button").forEach((button) =>{button.disabled = false});

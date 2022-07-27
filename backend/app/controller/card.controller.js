@@ -3,6 +3,7 @@ const Card = db.card;
 const PDFDocument = require('pdfkit');
 var fs = require('fs');
 var path = require('path');
+const { url } = require("inspector");
 
 exports.create = (req, res) => {
   if (!req.body.title) {
@@ -187,6 +188,22 @@ exports.getPDF = (req, res) => {
           }).moveDown();
         }
         
+        // References
+        doc.addPage();
+        doc.fillColor('white').opacity(1).fontSize(20).text("References", {
+          underline: true,
+          align: 'justify',
+        }).moveDown();
+        
+        let link = "";
+        
+        for(let i=0;i<data.references.length;i++){
+          link = data.references[i];
+          doc.fillColor('white').opacity(1).fontSize(16).text(link, {
+            align: 'justify',
+            link: {link}
+          }).moveDown();
+        }
         
         doc.end();
 

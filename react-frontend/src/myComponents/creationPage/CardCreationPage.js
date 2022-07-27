@@ -15,11 +15,12 @@ function CardCreationPage(){
 
     const [content, setContent] = React.useState();
     const [inputList, setInputList] = React.useState([{ paragraphTitle: "", paragraphContent: "" }]);
+    const [links, setLinks] = React.useState([{link: ""}]);
     const [topics, setTopics] = React.useState(["example"]);
 
     var card;
 
-    /** form add/remove input methods **/
+    /** content add/remove input methods **/
 
     // handle input change
     const handleInputChange = (e, index) => {
@@ -39,6 +40,28 @@ function CardCreationPage(){
     // handle click event of the Add button
     const handleAddClick = () => {
         setInputList([...inputList, { paragraphTitle: "", paragraphContent: "" }]);
+    };
+
+    /** links add/remove input methods **/
+
+    // handle input change
+    const handleLinkChange = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...links];
+        list[index][name] = value;
+        setLinks(list);
+    };
+
+    // handle click event of the Remove button
+    const handleRemoveLinkClick = index => {
+        const list = [...links];
+        list.splice(index, 1);
+        setLinks(list);
+    };
+
+    // handle click event of the Add button
+    const handleAddLinkClick = () => {
+        setLinks([...links, {link: ""}]);
     };
 
     function save(card){
@@ -76,7 +99,7 @@ function CardCreationPage(){
             }
             setTimeout(() => { 
                 setContent();
-                window.location.replace("/cards");
+                // window.location.replace("/cards");
              }, 2000)      
         }
     }
@@ -99,7 +122,15 @@ function CardCreationPage(){
             }
         }
         card.content=usefullcontent;
+        usefullcontent  = [];
         card.topics = topics;
+        for(let i=0; i<links.length; i++){
+
+            if(links[i]!== ""){
+                usefullcontent.push(links[i].link);
+            }
+        }
+        card.references = usefullcontent;
         save(card);
       }; 
     
@@ -119,7 +150,7 @@ function CardCreationPage(){
                 {errors.exampleRequired && <p id="required">This field is required!</p>}
                 
                 <h2>Topics</h2>
-                /* TODO: correct css for tags input */
+                {/* TODO: correct css for tags input */}
                 <TagsInput
                     value={topics}
                     onChange={setTopics}
@@ -155,6 +186,25 @@ function CardCreationPage(){
                     </div>
                     );
                 })}
+
+                <h2>References</h2>
+                {links.map((x, i) => {
+
+                    return (
+                    <div className="box" key={"ref-"+{i}}>
+                        <input
+                        name="link"
+                        placeholder="Link"
+                        value={x.title}
+                        onChange={e => handleLinkChange(e, i)}
+                        />
+                        <div className="btn-box">
+                            {links.length !== 1 && <Button variant="danger" style={{marginLeft: "20px", marginBottom: "10px"}} className="mr10" onClick={() => handleRemoveLinkClick(i)}><AiOutlineMinus/></Button>}
+                            {links.length - 1 === i && <Button variant="success" style={{marginLeft: "20px", marginBottom: "10px"}}onClick={handleAddLinkClick}><BsPlusLg/></Button>}
+                        </div>
+                    </div>
+                    );
+                    })}
                 {content}
                 <input value="Create Card" type="submit"/>
             </form>
